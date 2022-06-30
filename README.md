@@ -1,24 +1,27 @@
-# README
+# Ruby On Rails Cloud
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project aim to provide a simple open-source cloud manager (using his own deployments services) able to simply upload file (with an account) and retrieve it without needed to be authentificate (with only a link or tag)
 
-Things you may want to cover:
+# TODO:
+Add a way to provide a secure code in order to retrieve file.
 
-* Ruby version
+# System Informations:
+ - Ruby version: 2.7.1 # TODO: Update to more recent version
+ - Rails version: 7.0.3
+ - System dependencies: 
+   - macos: imagemagick vips postgresql # For image_processing, 
+   - debian/ubuntu: imagemagick libvips postgresql # For image processing, 
 
-* System dependencies
+# Startup:
 
-* Configuration
+# Deployments:
 
-* Database creation
+# Search files:
 
-* Database initialization
+# Possible limitation and security issue:
 
-* How to run the test suite
+---
 
-* Services (job queues, cache servers, search engines, etc.)
+# Author:
 
-* Deployment instructions
-
-* ...
+BOUT Valentin -> bout.valentin@gmail.com
