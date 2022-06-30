@@ -1,0 +1,43 @@
+<div class="header">
+  <h1>3Codas Cloud</h1>
+  <%= link_to "Sign Out", destroy_user_session_path, data: { "turbo-method": :delete } %>
+</div>
+<div class="upload-container">
+  <h3>Upload a new file</h3>
+  <%= form_with model: @file do |form| %>
+    <%= form.label :tag, "Tag / ID / Path:" %>
+    <%= form.text_field :tag %>
+    <%= form.label :file, "File:" %>
+    <%= form.file_field :file %>
+    <%= form.submit "Upload" %>
+  <% end %>
+</div>
+
+<div class="copy-notice hidden">
+  <p>Copy with success</p>
+  <p>Error when trying to copy</p>
+</div>
+
+<div class="files-container">
+  <% @files.each do |file| %>
+    <div class="file-container" data-controller="hello">
+      <div class="info-sub-container">
+        <p>Tag / ID / Path: <span class="bold" data-hello-target="tag" ><%= file.tag %></span></p>
+        <%= image_tag asset_path('copy.svg'), title: "Copy tag", data: {action: "click->hello#copy_tag"} %>
+      </div>
+      <div class="file-sub-container">
+        <p class='info'> Click on File preview to copy link</p>
+        <% if file.file.image? %>
+          <%= image_tag file.file, title: "Click on me to copy link", loading: "lazy", data: {action: "click->hello#copy_file_link", 'hello-target': 'file', src: rails_blob_url(file.file)} %>
+        <% elsif file.file.representable? %>
+          <%= image_tag file.file.representation(resize_to_limit: [300, 300]), title: "Click on me to copy link", loading: "lazy", data: {action: "click->hello#copy_file_link", 'hello-target': 'file', src: rails_blob_url(file.file)} %>
+        <% else %>
+          <%= image_tag asset_path('no-image.png'), title: "Copy file url",  loading: "lazy",data: {action: "click->hello#copy_file_link", 'hello-target': 'file', src: rails_blob_url(file.file)}%>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  <% if @files.empty? %>
+    <p>There is no files to be display</p>
+  <% end %>
+</div>

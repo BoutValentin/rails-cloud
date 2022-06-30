@@ -1,0 +1,239 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+html {
+  background: #231f20;
+  color: #fff;
+  font-family: 'Kantumruy Pro', sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: 0px auto;
+}
+
+.header{
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center ;
+  justify-content: space-around;
+  padding: 10px 0px;
+}
+
+.header > h1{
+  color: #fff;
+}
+
+.header > a {
+  color: #fff;
+}
+
+.upload-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  width: 100%;
+}
+
+.upload-container > form {
+  display: flex;
+  flex-direction: column;
+}
+
+.upload-container > form > label {
+  margin-top: 20px;
+}
+
+.upload-container > form > input[type="submit"] {
+  margin-top: 20px;
+  background-color: #7ebec2;
+  border-radius: 8px;
+  border: none;
+  padding: 10px 10px;
+  font-size: 14px;
+  color: #fff;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.files-container {
+  margin: 30px 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.file-container {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  align-items: center;
+  max-width: 350px;
+  width: 100%;
+  margin: 20px 10px;
+  background-color: #342e30;
+  border-radius: 8px;
+  border: 1px solid #332f30;
+  transition: all 0.3s ease;
+}
+
+.file-container:hover {
+  background-color: #5c5155;
+}
+
+.info-sub-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.info-sub-container > img {
+  height: 20px;
+  width: 20px;
+  margin: 0px 0px 0px 20px;
+  cursor: pointer;
+  transition: all 0.3 ease;
+}
+
+.info-sub-container > img:active {
+  transform: scale(0.95);
+}
+
+.file-sub-container {
+  position: relative;
+  max-width: 320px;
+  width: 100%;
+  max-height: 320px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.file-sub-container:active {
+  transform: scale(0.95);
+}
+
+.file-sub-container > p.info {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-size: 10px;
+  background: #7ebec2;
+  border-radius: 5px;
+  padding: 3px 8px;
+  display: none;
+}
+
+.file-sub-container:hover > p {
+  display: block;
+}
+
+.file-sub-container > img {
+  max-height: 100%;
+  width: 100%;
+  border-radius: inherit;
+}
+
+.copy-notice, div.notice {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+  font-weight: 800;
+  z-index: 100;
+}
+
+div.notice {
+  background: #fff;
+  transition: all 0.3s ease;
+}
+
+div.notice > p {
+  margin: 0px;
+}
+
+p.notice {
+  color: #00c49a;
+}
+
+p.alert {
+  color: #bb4430;
+}
+
+
+.copy-notice > p {
+  margin: 0;
+}
+
+.copy-notice.success {
+  background-color: #00c49a;
+}
+
+.copy-notice.error {
+  background-color: #bb4430;
+}
+
+.copy-notice.success :nth-child(2) {
+  display: none;
+}
+
+.copy-notice.success :nth-child(1) {
+  display: block;
+}
+
+.copy-notice.error :nth-child(2) {
+  display: block;
+}
+
+.copy-notice.error :nth-child(1) {
+  display: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.bold {
+  font-weight: 800;
+}
+
+.appear {
+  animation-name: appear_from_rigth;
+  animation-duration: 0.5s;
+  animation-timing-function: ease;
+}
+
+@keyframes appear_from_rigth {
+  0% {
+    transform: translateX(200px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+.show {
+  display: block !important;
+}
