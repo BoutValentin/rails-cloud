@@ -18,7 +18,15 @@ class FileInfosController < ApplicationController
 
   def find
     @file = find_file
+
     if @file
+      if @file.should_be_secure
+        if find_params_permit[:token] != @file.token
+          return respond_to do |format|
+            format.html { head :not_found }
+          end
+        end
+      end        
       redirect_to(url_for(@file.file))
     else
       respond_to do |format|
@@ -57,7 +65,7 @@ class FileInfosController < ApplicationController
   end
   
   def find_params_permit
-    params.permit(searching_attributes)
+    params.permit([searching_attributes] + [:token])
   end
 
   def find_file

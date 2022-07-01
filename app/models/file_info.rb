@@ -18,6 +18,18 @@ class FileInfo < ApplicationRecord
     random_token
   end
 
+  def file_url
+    params = ["tag=#{self.tag}"]
+    params.append("token=#{self.token}") if self.should_be_secure
+    "#{Rails.application.routes.url_helpers.rails_blob_url(self.file)}?#{params.join("&")}"
+  end
+
+  def file_representation_url(resize = [300, 300])
+    params = ["tag=#{self.tag}"]
+    params.append("token=#{self.token}") if self.should_be_secure
+    "#{Rails.application.routes.url_helpers.rails_blob_url(self.file.representation(resize_to_limit: resize))}?#{params.join("&")}"
+  end
+
   private
 
   def genenerate_assigne_token

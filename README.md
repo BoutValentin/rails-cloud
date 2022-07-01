@@ -18,7 +18,9 @@ Add a way to provide a secure code in order to retrieve file.
 
 ## Search files:
 
-## Possible limitation and security issue:
+## Limitation and security issue:
+
+Limitation: regen token  -> still 5 minutes
 
 ---
 
