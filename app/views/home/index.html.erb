@@ -32,11 +32,11 @@
       <div class="file-sub-container">
         <p class='info'> Click on File preview to copy link</p>
         <% if file.file.image? %>
-          <%= image_tag file.file_url, title: "Click on me to copy link", loading: "lazy", data: {action: "click->hello#copy_file_link", 'hello-target': 'file', src: file.file_url} %>
+          <%= image_tag file.file_url, title: "Click on me to copy link", loading: "lazy", data: {action: "click->hello#copy_file_link", 'hello-target': 'file', src: file_url(token: file.token, tag: file.tag)} %>
         <% elsif file.file.representable? %>
-          <%= image_tag file.file_representation_url, title: "Click on me to copy link", loading: "lazy", data: {action: "click->hello#copy_file_link", 'hello-target': 'file', src: file.file_url} %>
+          <%= image_tag file.file_representation_url, title: "Click on me to copy link", loading: "lazy", data: {action: "click->hello#copy_file_link", 'hello-target': 'file', src: file_url(token: file.token, tag: file.tag)} %>
         <% else %>
-          <%= image_tag asset_path('no-image.png'), title: "Copy file url",  loading: "lazy",data: {action: "click->hello#copy_file_link", 'hello-target': 'file', src: file.file_url}%>
+          <%= image_tag asset_path('no-image.png'), title: "Copy file url",  loading: "lazy",data: {action: "click->hello#copy_file_link", 'hello-target': 'file', src: file_url(token: file.token, tag: file.tag)}%>
         <% end %>
       </div>
       <% if file.should_be_secure %>

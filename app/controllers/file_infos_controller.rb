@@ -27,7 +27,7 @@ class FileInfosController < ApplicationController
           end
         end
       end        
-      redirect_to(url_for(@file.file))
+      redirect_to(@file.file_url, allow_other_host: true)
     else
       respond_to do |format|
         format.html { head :not_found }
