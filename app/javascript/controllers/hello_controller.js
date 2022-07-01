@@ -1,27 +1,40 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = [ "tag", "file" ];
+  static targets = [ "tag", "file", "token" ];
   static timer = null;
 
-  copy_file_link() {
+  copy_abstract(f_copy = () => {}) {
     this.reset_copy_notice();
-    const file = this.fileTarget;
-    const src = file.dataset['src'];
-    // Delay for animation
+    const to_copy = f_copy();
     window.setTimeout(() => {
-      this.update_clipboard(src);
+      this.update_clipboard(to_copy);
     }, 100)
   }
 
+  copy_file_link() {
+    this.copy_abstract(() => {
+      const file = this.fileTarget;
+      return file.dataset['src'];
+    });
+  }
+
+  copy_token() {
+    this.copy_abstract(() => {
+      const tokenElement = this.tokenTarget;
+      return tokenElement.innerText;
+    });
+  }
+
   copy_tag() {
-    this.reset_copy_notice();
-    const tagElement = this.tagTarget;
-    const tag = tagElement.innerText;
-    // Delay for animation
-    window.setTimeout(() => {
-      this.update_clipboard(tag);
-    }, 100)
+    this.copy_abstract(() => {
+      const tagElement = this.tagTarget;
+      return tagElement.innerText;
+    });
+  }
+
+  regen_token() {
+    console.log("Asking to regen token");
   }
 
   update_clipboard(message) {

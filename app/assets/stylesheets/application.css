@@ -101,13 +101,15 @@ body {
   background-color: #5c5155;
 }
 
-.info-sub-container {
+.info-sub-container, .token-sub-container {
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  max-width: 100%;
 }
 
-.info-sub-container > img {
+.info-sub-container > img, .token-sub-container > img, .token-sub-container > form > input {
   height: 20px;
   width: 20px;
   margin: 0px 0px 0px 20px;
@@ -115,7 +117,19 @@ body {
   transition: all 0.3 ease;
 }
 
-.info-sub-container > img:active {
+.token-sub-container > img, .token-sub-container > form > input {
+  margin: 0px 5px;
+}
+
+.token-sub-container > p {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 80%;
+  white-space: nowrap;
+}
+
+
+.info-sub-container > img:active, .token-sub-container > img:active {
   transform: scale(0.95);
 }
 

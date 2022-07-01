@@ -35,6 +35,13 @@
           <%= image_tag asset_path('no-image.png'), title: "Copy file url",  loading: "lazy",data: {action: "click->hello#copy_file_link", 'hello-target': 'file', src: rails_blob_url(file.file)}%>
         <% end %>
       </div>
+      <div class="token-sub-container">
+        <p>Token: <span class="bold"  data-hello-target="token"><%= file.token %></span></p>
+        <%= image_tag asset_path('copy.svg'), title: "Copy token", data: {action: "click->hello#copy_token"} %>
+        <%= form_with url: file_regen_token_path(tag: file.tag), method: :post do |form| %>
+          <%= form.submit "Submit", type: :image, src: asset_path('reload.svg'), title: "Regenerate token", data: {action: "click->hello#regen_token"} %>
+        <% end %>
+      </div>
     </div>
   <% end %>
   <% if @files.empty? %>

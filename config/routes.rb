@@ -7,4 +7,5 @@ Rails.application.routes.draw do
 
   resources :file_infos, only: [:create]
   get '/file', to: "file_infos#find"
+  post '/file/regen_token', to: "file_infos#regen_token"
 end
