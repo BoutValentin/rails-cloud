@@ -49,7 +49,7 @@ class FileInfosController < ApplicationController
   private
 
   def params_permit
-    params.require(:file_info).permit(:tag, :file)
+    params.require(:file_info).permit(:tag, :file, :should_be_secure)
   end
 
   def searching_attributes

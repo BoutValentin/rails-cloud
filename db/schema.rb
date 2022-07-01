@@ -45,6 +45,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_30_084623) do
   create_table "file_infos", force: :cascade do |t|
     t.string "tag"
     t.string "token"
+    t.boolean "should_be_secure", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["tag"], name: "index_file_infos_on_tag", unique: true

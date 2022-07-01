@@ -9,6 +9,10 @@
     <%= form.text_field :tag %>
     <%= form.label :file, "File:" %>
     <%= form.file_field :file %>
+    <div class="flex-row mt_20px">
+      <%= form.label :should_be_secure, "Need to be protect with a token:" %>
+      <%= form.check_box :should_be_secure, checked: true %>
+    </div>
     <%= form.submit "Upload" %>
   <% end %>
 </div>
@@ -35,6 +39,7 @@
           <%= image_tag asset_path('no-image.png'), title: "Copy file url",  loading: "lazy",data: {action: "click->hello#copy_file_link", 'hello-target': 'file', src: rails_blob_url(file.file)}%>
         <% end %>
       </div>
+      <% if file.should_be_secure %>
       <div class="token-sub-container">
         <p>Token: <span class="bold"  data-hello-target="token"><%= file.token %></span></p>
         <%= image_tag asset_path('copy.svg'), title: "Copy token", data: {action: "click->hello#copy_token"} %>
@@ -42,6 +47,7 @@
           <%= form.submit "Submit", type: :image, src: asset_path('reload.svg'), title: "Regenerate token", data: {action: "click->hello#regen_token"} %>
         <% end %>
       </div>
+      <% end %>
     </div>
   <% end %>
   <% if @files.empty? %>

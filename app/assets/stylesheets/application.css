@@ -251,3 +251,12 @@ p.alert {
 .show {
   display: block !important;
 }
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.mt_20px {
+  margin-top: 20px;
+}
