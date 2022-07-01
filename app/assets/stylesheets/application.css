@@ -95,10 +95,34 @@ body {
   border-radius: 8px;
   border: 1px solid #332f30;
   transition: all 0.3s ease;
+  position: relative;
 }
 
 .file-container:hover {
   background-color: #5c5155;
+}
+
+.trash-sub-container {
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  background-color: #fff;
+  border-radius: 50%;
+  padding: 4px;
+  opacity: 0.5;
+  top: -10px;
+  right: -10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.trash-sub-container:hover {
+  opacity: 1;
+  background-color: #bb4430;
+}
+
+.trash-sub-container:active {
+  transform: scale(0.95);
 }
 
 .info-sub-container, .token-sub-container {

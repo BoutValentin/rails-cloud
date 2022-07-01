@@ -33,10 +33,6 @@ export default class extends Controller {
     });
   }
 
-  regen_token() {
-    console.log("Asking to regen token");
-  }
-
   update_clipboard(message) {
     navigator.clipboard.writeText(message).then(() => {
       this.update_copy_notice(['success', 'appear'], ['hidden']);

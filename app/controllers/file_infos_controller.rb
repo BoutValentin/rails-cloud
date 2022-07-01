@@ -54,6 +54,25 @@ class FileInfosController < ApplicationController
     end
   end
 
+  def delete
+    @file = find_file
+    if @file
+      if @file.destroy
+        respond_to do |format|
+          format.html { redirect_to(root_url, notice: "File was delete.") }
+        end
+      else
+        respond_to do |format|
+          format.html { redirect_to(root_url, alert: "File wasn't delete: #{@file.errors.full_messages.join(' and ')}") }
+        end
+      end
+    else
+      respond_to do |format|
+        format.html { head :not_found }
+      end
+    end
+  end
+
   private
 
   def params_permit
