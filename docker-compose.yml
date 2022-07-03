@@ -1,0 +1,90 @@
+version: "3.9"
+
+services:
+  reverse-proxy:
+    build:
+      context: .
+      dockerfile: ops/nginx/Dockerfile
+    profiles: ["run"]
+    ports:
+     - '80:80'
+    depends_on:
+      - rails-cloud
+
+  rails-cloud:
+    build:
+      context: .
+      dockerfile: ops/rails/Dockerfile
+      args:
+        USER_NAME: rails-cloud
+        GROUP_NAME: rails-cloud-group
+        UID: ${USERID}
+        GID: ${GROUPID}
+    profiles: ["run"]
+    command: "sh -c './ops/script/wait-for.sh postgres:5432 -- bin/rails s -b 0.0.0.0'"
+    environment:
+      DATABASE_URL: postgres://1zlvUiFIot:aY09fB4McS@postgres:5432
+      RACK_ENV: development
+      RAILS_ENV: development
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+    depends_on:
+      - postgres
+    volumes:
+      - ./:/app
+    ports:
+      - '3000:3000'    
+  
+  rails-cloud-migrator: 
+    build:
+      context: .
+      dockerfile: ops/rails/Dockerfile
+      args:
+        USER_NAME: rails-cloud
+        GROUP_NAME: rails-cloud-group
+        UID: ${USERID}
+        GID: ${GROUPID}
+    profiles: ["migrate"]
+    command: "sh -c './ops/script/wait-for.sh postgres:5432 -- rake db:migrate'"
+    environment:
+      DATABASE_URL: postgres://1zlvUiFIot:aY09fB4McS@postgres:5432
+      RACK_ENV: development
+      RAILS_ENV: development
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+    depends_on:
+      - postgres
+    volumes:
+      - ./:/app
+    
+  rails-cloud-db-creator: 
+    build:
+      context: .
+      dockerfile: ops/rails/Dockerfile
+      args:
+        USER_NAME: rails-cloud
+        GROUP_NAME: rails-cloud-group
+        UID: ${USERID}
+        GID: ${GROUPID}
+    profiles: ["init"]
+    command: "sh -c './ops/script/wait-for.sh postgres:5432 -- rake db:create && rake db:create RAILS_ENV=test'"
+    environment:
+      DATABASE_URL: postgres://1zlvUiFIot:aY09fB4McS@postgres:5432
+      RACK_ENV: development
+      RAILS_ENV: development
+      RAILS_MASTER_KEY: ${RAILS_MASTER_KEY}
+    depends_on:
+      - postgres
+    volumes:
+      - ./:/app
+
+  postgres:
+    image: postgres:14.2
+    environment:
+      POSTGRES_USER: 1zlvUiFIot
+      POSTGRES_PASSWORD: aY09fB4McS
+    ports: 
+      - '5432:5432'
+    volumes:
+      - rails-cloud-postgres:/var/lib/postgresql/data
+
+volumes:
+  rails-cloud-postgres:
