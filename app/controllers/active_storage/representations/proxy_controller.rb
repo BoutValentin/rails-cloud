@@ -11,6 +11,7 @@ class ActiveStorage::Representations::ProxyController < ActiveStorage::Represent
 
   def show
     http_cache_forever public: true do
+      # Passing token and tag in the sending blob
       send_blob_stream @representation.image, disposition: params[:disposition], token: params[:token], tag: params[:tag]
     end
   end

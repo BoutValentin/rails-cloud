@@ -18,6 +18,7 @@ class ActiveStorage::Blobs::ProxyController < ActiveStorage::BaseController
         response.headers["Accept-Ranges"] = "bytes"
         response.headers["Content-Length"] = @blob.byte_size.to_s
 
+        # Passing token and tag in the sending blob
         send_blob_stream @blob, disposition: params[:disposition], token: params[:token], tag: params[:tag]
       end
     end
