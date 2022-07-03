@@ -1,0 +1,14 @@
+<div class="upload-container">
+  <h3>Upload a new file</h3>
+  <%= form_with model: @file do |form| %>
+    <%= form.label :tag, "Tag / ID / Path:" %>
+    <%= form.text_field :tag %>
+    <%= form.label :file, "File:" %>
+    <%= form.file_field :file %>
+    <div class="flex-row mt_20px">
+      <%= form.label :should_be_secure, "Need to be protect with a token:" %>
+      <%= form.check_box :should_be_secure, checked: true %>
+    </div>
+    <%= form.submit "Upload" %>
+  <% end %>
+</div>

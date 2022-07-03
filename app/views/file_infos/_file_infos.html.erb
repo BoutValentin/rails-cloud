@@ -1,0 +1,43 @@
+<%# Render a file_infos %>
+<div class="file-container" data-controller="copy">
+  <%# Display an absolute trash button use to delete file %>
+  <div class="trash-sub-container">
+    <%# Form use to create a delete request with an image stores in assets/image %>
+    <%= form_with url: file_path(tag: file.tag), method: :delete, data: { turbo_confirm: 'Are you sure you want to delete this file?' } do |form| %>
+      <%= form.submit "Submit", type: :image, src: asset_path('trash.svg'), title: "Delete this file" %>
+    <% end %>
+  </div>
+
+  <%# Show tag of the file_info and a simple copy button who use stimulus %>
+  <div class="info-sub-container">
+    <p>Tag / ID / Path: <span class="bold" data-copy-target="tag" ><%= file.tag %></span></p>
+    <%= image_tag asset_path('copy.svg'), title: "Copy tag", data: {action: "click->copy#copy_tag"} %>
+  </div>
+
+  <%# Show the image or a preview of the file store %>
+  <div class="file-sub-container">
+    <%# An absolute notice display hover image in order to inform user that he can copy link %>
+    <p class='info'> Click on File preview to copy link</p>
+    <%# If the file attachment is an image, we try to display it %>
+    <% if file.file.image? %>
+      <%= image_tag file.file_url, title: "Click on me to copy link", loading: "lazy", data: {action: "click->copy#copy_file_link", 'copy-target': 'file', src: file_url(token: file.token, tag: file.tag)} %>
+    <%# If the file is not an image but can still be represents (as a pdf or a video), we show it %>
+    <% elsif file.file.representable? %>
+      <%= image_tag file.file_representation_url, title: "Click on me to copy link", loading: "lazy", data: {action: "click->copy#copy_file_link", 'copy-target': 'file', src: file_url(token: file.token, tag: file.tag)} %>
+    <%# If we can't do both, we show a default image %>
+    <% else %>
+      <%= image_tag asset_path('no-image.png'), title: "Copy file url",  loading: "lazy",data: {action: "click->copy#copy_file_link", 'copy-target': 'file', src: file_url(token: file.token, tag: file.tag)}%>
+    <% end %>
+  </div>
+
+  <%# If file is secure, we show the token (and a simple button to copy and regenerate it %>
+  <% if file.should_be_secure %>
+    <div class="token-sub-container">
+      <p>Token: <span class="bold"  data-copy-target="token"><%= file.token %></span></p>
+      <%= image_tag asset_path('copy.svg'), title: "Copy token", data: {action: "click->copy#copy_token"} %>
+      <%= form_with url: file_regen_token_path(tag: file.tag), method: :post, data: { turbo_confirm: 'Are you sure you want to regenerate token? (user with old token will not been able to use this file anymore)' } do |form| %>
+        <%= form.submit "Submit", type: :image, src: asset_path('reload.svg'), title: "Regenerate token" %>
+      <% end %>
+    </div>
+  <% end %>
+</div>

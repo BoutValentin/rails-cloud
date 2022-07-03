@@ -1,0 +1,12 @@
+<%# Renders a list of file_infos %>
+<div class="files-container">
+  <%# Try to display each file %>
+  <% @files.each do |file| %>
+    <%# Rendering a file using the file template (store in views/file_infos/_file_infos.html.erb %>
+    <%= render "file_infos/file_infos", file: file %>
+  <% end %>
+
+  <% if @files.empty? %>
+    <p>There is no files to be display</p>
+  <% end %>
+</div>

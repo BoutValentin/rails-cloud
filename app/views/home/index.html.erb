@@ -1,61 +1,13 @@
-<div class="header">
-  <h1><%= ENV["CLOUD_NAME"] || "Simply" %> Cloud</h1>
-  <%= link_to "Sign Out", destroy_user_session_path, data: { "turbo-method": :delete } %>
-</div>
-<div class="upload-container">
-  <h3>Upload a new file</h3>
-  <%= form_with model: @file do |form| %>
-    <%= form.label :tag, "Tag / ID / Path:" %>
-    <%= form.text_field :tag %>
-    <%= form.label :file, "File:" %>
-    <%= form.file_field :file %>
-    <div class="flex-row mt_20px">
-      <%= form.label :should_be_secure, "Need to be protect with a token:" %>
-      <%= form.check_box :should_be_secure, checked: true %>
-    </div>
-    <%= form.submit "Upload" %>
-  <% end %>
-</div>
+<%# Main (and only) page of the application who handle file uploading and file listing %>
 
-<div class="copy-notice hidden">
-  <p>Copy with success</p>
-  <p>Error when trying to copy</p>
-</div>
+<%# Rendering header for the index (store in views/shared/_header.html.erb) %>
+<%= render "shared/header" %>
 
-<div class="files-container">
-  <% @files.each do |file| %>
-    <div class="file-container" data-controller="copy">
-      <div class="trash-sub-container">
-        <%= form_with url: file_path(tag: file.tag), method: :delete, data: { turbo_confirm: 'Are you sure you want to delete this file?' } do |form| %>
-          <%= form.submit "Submit", type: :image, src: asset_path('trash.svg'), title: "Delete this file" %>
-        <% end %>
-      </div>
-      <div class="info-sub-container">
-        <p>Tag / ID / Path: <span class="bold" data-copy-target="tag" ><%= file.tag %></span></p>
-        <%= image_tag asset_path('copy.svg'), title: "Copy tag", data: {action: "click->copy#copy_tag"} %>
-      </div>
-      <div class="file-sub-container">
-        <p class='info'> Click on File preview to copy link</p>
-        <% if file.file.image? %>
-          <%= image_tag file.file_url, title: "Click on me to copy link", loading: "lazy", data: {action: "click->copy#copy_file_link", 'copy-target': 'file', src: file_url(token: file.token, tag: file.tag)} %>
-        <% elsif file.file.representable? %>
-          <%= image_tag file.file_representation_url, title: "Click on me to copy link", loading: "lazy", data: {action: "click->copy#copy_file_link", 'copy-target': 'file', src: file_url(token: file.token, tag: file.tag)} %>
-        <% else %>
-          <%= image_tag asset_path('no-image.png'), title: "Copy file url",  loading: "lazy",data: {action: "click->copy#copy_file_link", 'copy-target': 'file', src: file_url(token: file.token, tag: file.tag)}%>
-        <% end %>
-      </div>
-      <% if file.should_be_secure %>
-      <div class="token-sub-container">
-        <p>Token: <span class="bold"  data-copy-target="token"><%= file.token %></span></p>
-        <%= image_tag asset_path('copy.svg'), title: "Copy token", data: {action: "click->copy#copy_token"} %>
-        <%= form_with url: file_regen_token_path(tag: file.tag), method: :post, data: { turbo_confirm: 'Are you sure you want to regenerate token? (user with old token will not been able to use this file anymore)' } do |form| %>
-          <%= form.submit "Submit", type: :image, src: asset_path('reload.svg'), title: "Regenerate token" %>
-        <% end %>
-      </div>
-      <% end %>
-    </div>
-  <% end %>
-  <% if @files.empty? %>
-    <p>There is no files to be display</p>
-  <% end %>
-</div>
+<%# Rendering form for uploading a file (store in views/file_infos/_upload_form.html.erb) %>
+<%= render "file_infos/upload_form", file: @file %>
+
+<%# Rendering a div use to display notice when user use a copy button (store in views/shared/_copy_notice.html.erb) %>
+<%= render "shared/copy_notice" %>
+
+<%# Rendering the file list currently stores in cloud (template store in views/file_infos/_file_infos_list.html.erb %>
+<%= render "file_infos/file_infos_list", files: @files %>

@@ -1,0 +1,5 @@
+<%# The main header of the application %>
+<div class="header">
+  <h1><%= ENV["CLOUD_NAME"] || "Simply" %> Cloud</h1>
+  <%= link_to "Sign Out", destroy_user_session_path, data: { "turbo-method": :delete } %>
+</div>
