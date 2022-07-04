@@ -3,7 +3,7 @@ class FileInfo < ApplicationRecord
   validates :file, :tag, presence: true
   validates :token, exclusion: { in: [nil] }
   validates :should_be_secure, inclusion: [true, false]
-  validates :tag, :token, uniqueness: { case_sensitive: false }
+  validates :tag, :token, uniqueness: { case_sensitive: false, allow_blank: true }
   
   before_validation :check_should_be_secure_not_nil
   before_validation :genenerate_assigne_token

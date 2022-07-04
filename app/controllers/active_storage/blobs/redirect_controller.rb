@@ -12,6 +12,6 @@ class ActiveStorage::Blobs::RedirectController < ActiveStorage::BaseController
   def show
     expires_in ActiveStorage.service_urls_expire_in
     # Passing token and tag in the redirect url
-    redirect_to @blob.url(disposition: params[:disposition], token: params[:token], tag: params[:tag]), allow_other_host: true
+    redirect_to @blob.url(disposition: params[:disposition]), allow_other_host: true
   end
 end
