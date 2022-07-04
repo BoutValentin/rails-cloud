@@ -156,6 +156,18 @@ aws:
   bucket: <bucket_name> # The name of the buckets
 ```
 
+#### SSL:
+
+The SSl can be generate using certbot. If you deploy this cloud using nginx container, you can use the ssl script.
+
+```
+$ docker exec -it <nginx_container_id> bash
+# Enter a bash in nginx
+$ ssl <email_address> <domain>
+```
+
+This will provide you a challenge to put a TXT record in a DNS section and check it. It will after enable ssl to your apps.
+
 ## Limitation and security issue:
 
 Even if a file is secure with a token, the default access is 5 minutes to a files. This pattern means that if you regenerate a token for a file, a delay of 5 minutes apply in order to make all user use a new token.

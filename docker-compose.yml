@@ -8,8 +8,11 @@ services:
     profiles: ["run"]
     ports:
      - '80:80'
+     - '443:443'
     depends_on:
       - rails-cloud
+    volumes:
+      - ssl-nginx:/etc/letsencrypt/
 
   rails-cloud:
     build:
@@ -88,3 +91,4 @@ services:
 
 volumes:
   rails-cloud-postgres:
+  ssl-nginx:
