@@ -113,7 +113,7 @@ You first need to init the database
 3. Launch the application
    - Launch the container using profile run
      ```
-     $ USERID=$(id -u) GROUPID=$(id -g) RAILS_MASTER_KEY=$(cat config/master.key) docker-compose --profile migrate run -d
+     $ USERID=$(id -u) GROUPID=$(id -g) RAILS_MASTER_KEY=$(cat config/master.key) docker-compose --profile run up -d
      ```
 4. Create an user
    - Launch the rake task in the containers
