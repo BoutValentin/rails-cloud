@@ -14,12 +14,21 @@
   </head>
 
   <body>
+    <%# Rendering a simple fancy logo%>
+    <%= render "shared/simple_logo", classes: "reverse" %>
+
+    <%# Rendering notice%>
     <% if !notice.nil? || !alert.nil? %>
     <div class="notice">
       <p class="notice"><%= notice %></p>
       <p class="alert"><%= alert %></p>
     </div>
     <% end %>
+
+    <%# Rendering sub-yield%>
     <%= yield %>
+
+    <%# Rendering a simple fancy logo%>
+    <%= render "shared/simple_logo", classes: "" %>
   </body>
 </html>

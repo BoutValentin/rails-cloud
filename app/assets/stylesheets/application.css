@@ -15,8 +15,8 @@
  */
 
 html {
-  background: #231f20;
-  color: #fff;
+  background: #fff;
+  color: #000;
   font-family: 'Kantumruy Pro', sans-serif;
 }
 
@@ -39,11 +39,11 @@ body {
 }
 
 .header > h1{
-  color: #fff;
+  color: #000;
 }
 
 .header > a {
-  color: #fff;
+  color: #000;
 }
 
 .upload-container {
@@ -58,13 +58,13 @@ body {
   flex-direction: column;
 }
 
-.upload-container > form > label {
+.upload-container > form > label, .field {
   margin-top: 20px;
 }
 
-.upload-container > form > input[type="submit"] {
+.upload-container > form > input[type="submit"], .new_user input[type="submit"] {
   margin-top: 20px;
-  background-color: #7ebec2;
+  background-color: #261299;
   border-radius: 8px;
   border: none;
   padding: 10px 10px;
@@ -72,6 +72,10 @@ body {
   color: #fff;
   font-weight: 800;
   cursor: pointer;
+}
+
+.new_user input[type="submit"] {
+  width: 100%;
 }
 
 .files-container {
@@ -91,15 +95,17 @@ body {
   max-width: 350px;
   width: 100%;
   margin: 20px 10px;
-  background-color: #342e30;
+  background-color: #fff;
   border-radius: 8px;
-  border: 1px solid #332f30;
   transition: all 0.3s ease;
   position: relative;
+  box-shadow: 0px 0px 18px 3px rgba(6, 0, 61, 0.06);
+  padding: 5px 5px 10px 5px;
 }
 
 .file-container:hover {
-  background-color: #5c5155;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 18px 3px rgba(6, 0, 61, 0.17);
 }
 
 .trash-sub-container {
@@ -118,7 +124,7 @@ body {
 
 .trash-sub-container:hover {
   opacity: 1;
-  background-color: #bb4430;
+  background-color: #f9372b;
 }
 
 .trash-sub-container:active {
@@ -176,7 +182,8 @@ body {
   bottom: 5px;
   right: 5px;
   font-size: 10px;
-  background: #7ebec2;
+  background: #261299;
+  color: #fff;
   border-radius: 5px;
   padding: 3px 8px;
   display: none;
@@ -217,7 +224,7 @@ p.notice {
 }
 
 p.alert {
-  color: #bb4430;
+  color: #f9372b;
 }
 
 
@@ -227,10 +234,11 @@ p.alert {
 
 .copy-notice.success {
   background-color: #00c49a;
+  color: #fff;
 }
 
 .copy-notice.error {
-  background-color: #bb4430;
+  background-color: #f9372b;
 }
 
 .copy-notice.success :nth-child(2) {
@@ -283,4 +291,10 @@ p.alert {
 
 .mt_20px {
   margin-top: 20px;
+}
+
+@media only screen and (max-width: 875px) {
+  .header {
+    background-color: #fff6;
+  }
 }

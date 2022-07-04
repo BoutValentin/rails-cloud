@@ -1,0 +1,44 @@
+.simple-logo-container {
+  position: fixed;
+  overflow: hidden;
+  height: 250px;
+  width: 300px;
+  bottom: 0px;
+  right: -35px;
+  z-index: -1;
+}
+
+.simple-logo-container.reverse {
+  top: 0px;
+  left: -30px;
+  transform: rotate(180deg);
+}
+
+.simple-logo-container > .b-round {
+  height: 30px;
+  width: 100%;
+  position: absolute;
+  transform: rotate(-55deg);
+  border-radius: 16px;
+}
+
+.simple-logo-container > .round-1 {
+  bottom: 0px;
+  right: 25px;
+  background: #261299;
+}
+
+.simple-logo-container.reverse > .round-1 {
+  background: #f9372b;
+}
+
+.simple-logo-container > .round-2 {
+  bottom: -75px;
+  right: 10px;
+  background: #f9372b;
+}
+
+.simple-logo-container.reverse > .round-2 {
+  background: #261299;
+}
+
